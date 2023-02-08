@@ -21,8 +21,4 @@
     <ProjectReference Include="..\PatientApp.Infrastructure.Persistence\PatientApp.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\User\" />
-  </ItemGroup>
-
 </Project>
