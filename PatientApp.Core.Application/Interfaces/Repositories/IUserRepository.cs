@@ -1,4 +1,4 @@
-﻿using PatientApp.Core.Application.ViewModerls.User;
+﻿using PatientApp.Core.Application.ViewModels.User;
 using PatientApp.Core.Domain.Entitites;
 
 namespace PatientApp.Core.Application.Interfaces.Repositories

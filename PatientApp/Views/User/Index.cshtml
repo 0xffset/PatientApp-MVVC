@@ -1,26 +1,57 @@
-﻿@using PatientApp.Core.Application.ViewModerls.User
-@model LoginViewModel
+﻿@using PatientApp.Core.Application.ViewModels.User
+@model List<UserViewModel>;
+
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Mat. Users";
 }
 
-<div class="row mt-5">
-    <div class="col-6 offset-3">
-        <div class="card shadow-sm" >
-            <div class="card-body">
-                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                <form method="post" asp-controller="User" asp-action="Index">
-                    <div class="mb-3">
-                        <label asp-for="Username" class="form-label">Nombre de usuario</label>
-                        <input class="form-control" asp-for="Username">
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="Password" class="form-label">Contraseña</label>
-                        <input class="form-control" asp-for="Password">                        
-                    </div>
-                    <button type="submit" class="btn btn-primary">Iniciar sección</button>
-                </form>
-            </div>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">User's Management</h1>
+            <p>
+                <a asp-controller="User" asp-action="Create" class="btn btn-primary my-2">Create New User</a>
+            </p>
         </div>
     </div>
+</section>
+
+
+<div class="container">
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>The Type List Is Empty</h2>
+    }
+    else {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Actions</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">User Type</th>
+                    <th scope="col">Email</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (UserViewModel item in Model)
+                {
+                    <tr>
+                        <th scope="row">
+                            <a asp-controller="User" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                            <a asp-controller="User" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </th>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Username</td>
+                        <td>@(item.AccessLevelId == 1 ? "Administrator" : "Assistant")</td>
+                        <td>@item.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>
+

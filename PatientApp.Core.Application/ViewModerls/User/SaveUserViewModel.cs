@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PatientApp.Core.Application.ViewModerls.User
+namespace PatientApp.Core.Application.ViewModels.User
 {
     public class SaveUserViewModel
     {

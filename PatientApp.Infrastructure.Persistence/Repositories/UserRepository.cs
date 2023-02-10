@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PatientApp.Core.Application.Helpers;
 using PatientApp.Core.Application.Interfaces.Repositories;
-using PatientApp.Core.Application.ViewModerls.User;
+using PatientApp.Core.Application.ViewModels.User;
 using PatientApp.Core.Domain.Entitites;
 using PatientApp.Infrastructure.Persistence.Contexts;
 

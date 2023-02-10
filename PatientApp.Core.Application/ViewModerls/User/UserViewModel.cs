@@ -1,4 +1,4 @@
-﻿namespace PatientApp.Core.Application.ViewModerls.User
+﻿namespace PatientApp.Core.Application.ViewModels.User
 {
     public class UserViewModel
     {

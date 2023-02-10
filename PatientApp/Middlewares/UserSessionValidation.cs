@@ -1,5 +1,5 @@
 ﻿using PatientApp.Core.Application.Helpers;
-using PatientApp.Core.Application.ViewModerls.User;
+using PatientApp.Core.Application.ViewModels.User;
 
 namespace PatientApp.Middlewares
 {

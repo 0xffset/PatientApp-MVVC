@@ -1,6 +1,6 @@
 ﻿using PatientApp.Core.Application.Interfaces.Repositories;
 using PatientApp.Core.Application.Interfaces.Services;
-using PatientApp.Core.Application.ViewModerls.User;
+using PatientApp.Core.Application.ViewModels.User;
 using PatientApp.Core.Domain.Entitites;
 
 namespace PatientApp.Core.Application.Services
@@ -57,6 +57,45 @@ namespace PatientApp.Core.Application.Services
             return userVm;
         }
 
+        public async Task<List<UserViewModel>> GetAllViewModel()
+        {
+            var userList = await userRepository.GetAllWithIncludeAsync(new List<string> { "AccessLevels" });
+            return userList.Select(x => new UserViewModel
+            {
+                Name = $"{x.FirstName} {x.LastName}",
+                Id = x.Id,
+                Username = x.Username,
+                AccessLevelId = x.AccessLevelId,
+                Email = x.Email
+            }).ToList();
+        }
+
+        public async Task Update(SaveUserViewModel vm)
+        {
+            User user = await userRepository.GetByIdAsync(vm.Id);
+            user.Id = vm.Id;
+            user.FirstName = vm.FirstName;
+            user.LastName = vm.LastName;
+            await userRepository.UpdateAsync(user);
+        }
+
+        public async Task Delete(int id)
+        {
+            var user = await userRepository.GetByIdAsync(id);
+            await userRepository.DeleteAsync(user);
+        }
+
+        public async Task<SaveUserViewModel> GetByIdSaveViewModel(int id)
+        {
+            var user = await userRepository.GetByIdAsync(id);
+            SaveUserViewModel vm = new();
+            vm.Id = user.Id;
+            vm.Username = user.Username;
+            vm.Email = user.Email;
+            vm.FirstName = user.FirstName;
+            vm.LastName = user.LastName;
+            return vm;
+        }
     }
 }
 
