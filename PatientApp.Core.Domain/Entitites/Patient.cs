@@ -14,10 +14,13 @@ namespace PatientApp.Core.Domain.Entitites
         public bool IsSmoker { get; set; }
         public bool HasAllergies { get; set; }
         public string Image { get; set; }
+        public int? LaboratoryResultId { get; set; }
+        public int? AppointmentId { get; set; }
 
         // Propery Navigation
-        public ICollection<Appointment> Appointments { get; set; }
-        public ICollection<LaboratoryResult> LaboratoryResults { get; set; }
+        public Appointment Appointment { get; set; }
+        public LaboratoryResult laboratoryResult { get; set; }
+
         public ICollection<Doctor> Doctors { get; set; }
     }
 }

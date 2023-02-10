@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PatientApp.Core.Application.Helpers;
-using PatientApp.Core.Application.Services;
+using PatientApp.Core.Application.Interfaces.Services;
 using PatientApp.Core.Application.ViewModerls.User;
 using PatientApp.Middlewares;
 
@@ -8,18 +8,18 @@ namespace PatientApp.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserService userService;
-        private readonly UserSessionValidation userSessionValidation;
+        private readonly IUserService _userService;
+        private readonly UserSessionValidation _userSessionValidation;
 
         public UserController(IUserService userService, UserSessionValidation userSessionValidation)
         {
-            this.userService = userService;
-            this.userSessionValidation = userSessionValidation;
+            _userService = userService;
+            _userSessionValidation = userSessionValidation;
         }
 
         public IActionResult Index()
         {
-            if (userSessionValidation.HasUser())
+            if (_userSessionValidation.HasUser())
             {
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
@@ -32,11 +32,11 @@ namespace PatientApp.Controllers
             {
                 return View(vm);
             }
-            if (userSessionValidation.HasUser())
+            if (_userSessionValidation.HasUser())
             {
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
-            UserViewModel userVm = await userService.Login(vm);
+            UserViewModel userVm = await _userService.Login(vm);
             if (userVm != null)
             {
                 HttpContext.Session.Set<UserViewModel>("user", userVm);
@@ -51,7 +51,7 @@ namespace PatientApp.Controllers
         }
         public IActionResult Register()
         {
-            if (userSessionValidation.HasUser())
+            if (_userSessionValidation.HasUser())
             {
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
@@ -64,12 +64,12 @@ namespace PatientApp.Controllers
             {
                 return View(vm);
             }
-            if (userSessionValidation.HasUser())
+            if (_userSessionValidation.HasUser())
             {
                 return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
 
-            await userService.Add(vm);
+            await _userService.Add(vm);
             return RedirectToRoute(new { controller = "User", action = "Index" });
         }
 

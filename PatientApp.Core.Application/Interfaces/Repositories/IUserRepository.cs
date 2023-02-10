@@ -6,6 +6,5 @@ namespace PatientApp.Core.Application.Interfaces.Repositories
     public interface IUserRepository : IGenericRepository<User>
     {
         Task<User> LoginAsync(LoginViewModel loginVm);
-
     }
 }

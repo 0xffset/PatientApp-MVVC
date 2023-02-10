@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PatientApp.Core.Application.Interfaces.Repositories;
 using PatientApp.Infrastructure.Persistence.Contexts;
+using PatientApp.Infrastructure.Persistence.Repository;
 
 namespace PatientApp.Infrastructure.Persistence
 {
@@ -19,6 +21,11 @@ namespace PatientApp.Infrastructure.Persistence
                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                m => m.MigrationsAssembly(typeof(PatientAppContext).Assembly.FullName)));
             }
+
+            #region Repositories
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IUserRepository, UserRepository>();
+            #endregion
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using PatientApp.Core.Application.ViewModerls.User;
 
-namespace PatientApp.Core.Application.Services
+namespace PatientApp.Core.Application.Interfaces.Services
 {
     public interface IUserService : IGenericService<SaveUserViewModel, UserViewModel>
     {

@@ -5,7 +5,7 @@ using PatientApp.Core.Application.ViewModerls.User;
 using PatientApp.Core.Domain.Entitites;
 using PatientApp.Infrastructure.Persistence.Contexts;
 
-namespace PatientApp.Infrastructure.Persistence.Repositories
+namespace PatientApp.Infrastructure.Persistence.Repository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {

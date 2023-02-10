@@ -12,7 +12,6 @@ builder.Services.AddPersistenceInfrastructure(builder.Configuration);
 builder.Services.AddApplicationLayer(builder.Configuration);
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<UserSessionValidation, UserSessionValidation>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -11,9 +11,11 @@ namespace PatientApp.Core.Domain.Entitites
         public string DNI { get; set; }
         public string Image { get; set; }
 
+        public int? AppointmentId { get; set; }
+        public int? LaboratoryResultId { get; set; }
         // Navigation property
-        public ICollection<Patient>? Patients { get; set; }
-        public ICollection<Appointment>? Appointments { get; set; }
-        public ICollection<LaboratoryResult>? LaboratoryResults { get; set; }
+        public Appointment Appointment { get; set; }
+
+        public LaboratoryResult LaboratoryResult { get; set; }
     }
 }

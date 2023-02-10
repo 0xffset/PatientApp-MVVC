@@ -83,48 +83,52 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
 
             #region Relationships
 
-            modelBuilder.Entity<Doctor>()
-                .HasMany<Appointment>(x => x.Appointments)
-                .WithOne(x => x.Doctor)
-                .HasForeignKey(x => x.DoctorId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Doctor>()
-                .HasMany<LaboratoryResult>(x => x.LaboratoryResults)
-                .WithOne(x => x.Doctor)
-                .HasForeignKey(x => x.DoctorId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<Doctor>()
-                .HasMany<Patient>(x => x.Patients)
-                .WithMany(x => x.Doctors);
-
-
-            modelBuilder.Entity<Patient>()
-                .HasMany<Appointment>(x => x.Appointments)
-                .WithOne(x => x.Patient)
-                .HasForeignKey(x => x.PatientId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<Patient>()
-                .HasMany<LaboratoryResult>(x => x.LaboratoryResults)
-                .WithOne(x => x.Patient)
-                .HasForeignKey(x => x.PatientId)
-                .OnDelete(DeleteBehavior.NoAction);
-
+            // Patients
             modelBuilder.Entity<LaboratoryResult>()
-                .HasOne<LaboratoryTest>(x => x.LaboratoryTest)
-                .WithMany(x => x.LaboratoryResults)
-                .HasForeignKey(x => x.LaboratoryTestId)
-                 .OnDelete(DeleteBehavior.NoAction);
+                .HasMany<Patient>(g => g.Patients)
+                .WithOne(s => s.laboratoryResult)
+                .HasForeignKey(x => x.LaboratoryResultId)
+                  .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Appointment>()
+                .HasMany<Patient>(g => g.Patients)
+                .WithOne(s => s.Appointment)
+                .HasForeignKey(x => x.AppointmentId)
+                  .OnDelete(DeleteBehavior.NoAction);
+
+            // Appointments
             modelBuilder.Entity<LaboratoryResult>()
-                .HasOne<Appointment>(x => x.Appointment)
-                .WithOne(x => x.LaboratoryResult);
+                .HasMany<Appointment>(g => g.Appointments)
+                .WithOne(s => s.LaboratoryResult)
+                .HasForeignKey(x => x.LaboratoryResultId)
+                .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Doctor>()
+                .HasOne<Appointment>(g => g.Appointment)
+                .WithMany(s => s.Doctors)
+                .HasForeignKey(x => x.AppointmentId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+            modelBuilder.Entity<Doctor>()
+                .HasOne<LaboratoryResult>(g => g.LaboratoryResult)
+                .WithMany(s => s.Doctors)
+                .HasForeignKey(x => x.LaboratoryResultId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<LaboratoryTest>()
+                .HasOne<LaboratoryResult>(g => g.LaboratoryResult)
+                .WithMany(s => s.laboratoryTests)
+                .HasForeignKey(x => x.LaboratoryResultId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+            // Access Level 
             modelBuilder.Entity<AccessLevel>()
-                .HasOne<User>(x => x.User)
-                .WithOne(x => x.AccessLevel);
+                .HasOne<User>(g => g.User)
+                .WithMany(s => s.AccessLevels)
+                .HasForeignKey(x => x.UserId)
+                  .OnDelete(DeleteBehavior.NoAction);
 
             #endregion
 

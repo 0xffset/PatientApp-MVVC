@@ -1,17 +1,17 @@
-﻿namespace PatientApp.Core.Application.Services
+﻿namespace PatientApp.Core.Application.Interfaces.Services
 {
     public interface IGenericService<SaveViewModel, ViewModel>
             where SaveViewModel : class
             where ViewModel : class
     {
-        Task Update(SaveViewModel vm);
+        // Task Update(SaveViewModel vm);
 
         Task<SaveViewModel> Add(SaveViewModel vm);
 
-        Task Delete(int id);
+        //  Task Delete(int id);
 
-        Task<SaveViewModel> GetByIdSaveViewModel(int id);
+        //  Task<SaveViewModel> GetByIdSaveViewModel(int id);
 
-        Task<List<ViewModel>> GetAllViewModel();
+        // Task<List<ViewModel>> GetAllViewModel();
     }
 }

@@ -5,10 +5,10 @@ namespace PatientApp.Core.Domain.Entitites
     public class LaboratoryTest : AuditableBaseEntity
     {
         public string Name { get; set; }
+        public int? LaboratoryResultId { get; set; }
 
         // Navigation Property
-
-        public ICollection<LaboratoryResult> LaboratoryResults { get; set; }
+        public LaboratoryResult LaboratoryResult { get; set; }
 
     }
 }

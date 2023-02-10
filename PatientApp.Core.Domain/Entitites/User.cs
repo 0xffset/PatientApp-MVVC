@@ -12,7 +12,7 @@ namespace PatientApp.Core.Domain.Entitites
         public int AccessLevelId { get; set; }
 
         // Property navigation
-        public AccessLevel? AccessLevel { get; set; }
+        public ICollection<AccessLevel> AccessLevels { get; set; }
 
 
     }

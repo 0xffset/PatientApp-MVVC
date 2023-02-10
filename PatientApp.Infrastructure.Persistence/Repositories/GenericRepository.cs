@@ -2,7 +2,7 @@
 using PatientApp.Core.Application.Interfaces.Repositories;
 using PatientApp.Infrastructure.Persistence.Contexts;
 
-namespace PatientApp.Infrastructure.Persistence.Repositories
+namespace PatientApp.Infrastructure.Persistence.Repository
 {
     public class GenericRepository<Entity> : IGenericRepository<Entity> where Entity : class
     {
