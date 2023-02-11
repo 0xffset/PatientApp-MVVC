@@ -17,7 +17,7 @@ namespace PatientApp.Core.Application.ViewModels.User
         [DataType(DataType.Text)]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "You must enter a proper Password")]
+        [Required(ErrorMessage = "You must enter a proper UserType")]
         [Range(1, 2)]
         public int UserType { get; set; }
         [Required(ErrorMessage = "You must enter a proper Password")]

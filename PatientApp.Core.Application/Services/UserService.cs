@@ -76,6 +76,10 @@ namespace PatientApp.Core.Application.Services
             user.Id = vm.Id;
             user.FirstName = vm.FirstName;
             user.LastName = vm.LastName;
+            user.Username = vm.Username;
+            user.Password = vm.Password;
+            user.Email = vm.Email;
+            user.AccessLevelId = vm.UserType;
             await userRepository.UpdateAsync(user);
         }
 
@@ -94,6 +98,7 @@ namespace PatientApp.Core.Application.Services
             vm.Email = user.Email;
             vm.FirstName = user.FirstName;
             vm.LastName = user.LastName;
+            vm.UserType = user.AccessLevelId;
             return vm;
         }
     }

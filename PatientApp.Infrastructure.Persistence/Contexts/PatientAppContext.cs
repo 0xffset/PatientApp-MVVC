@@ -103,18 +103,18 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
                 .HasForeignKey(x => x.LaboratoryResultId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Doctor>()
-                .HasOne<Appointment>(g => g.Appointment)
-                .WithMany(s => s.Doctors)
-                .HasForeignKey(x => x.AppointmentId)
-                .OnDelete(DeleteBehavior.NoAction);
+            /*  modelBuilder.Entity<Doctor>()
+                  .HasOne<Appointment>(g => g.Appointment)
+                  .WithMany(s => s.Doctors)
+                  .HasForeignKey(x => x.AppointmentId)
+                  .OnDelete(DeleteBehavior.NoAction);
 
 
-            modelBuilder.Entity<Doctor>()
-                .HasOne<LaboratoryResult>(g => g.LaboratoryResult)
-                .WithMany(s => s.Doctors)
-                .HasForeignKey(x => x.LaboratoryResultId)
-                .OnDelete(DeleteBehavior.NoAction);
+              modelBuilder.Entity<Doctor>()
+                  .HasOne<LaboratoryResult>(g => g.LaboratoryResult)
+                  .WithMany(s => s.Doctors)
+                  .HasForeignKey(x => x.LaboratoryResultId)
+                  .OnDelete(DeleteBehavior.NoAction);*/
 
             modelBuilder.Entity<LaboratoryTest>()
                 .HasOne<LaboratoryResult>(g => g.LaboratoryResult)

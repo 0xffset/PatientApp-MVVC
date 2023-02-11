@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PatientApp.Infrastructure.Persistence.Contexts;
 
@@ -11,9 +12,10 @@ using PatientApp.Infrastructure.Persistence.Contexts;
 namespace PatientApp.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(PatientAppContext))]
-    partial class PatientAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230211071402_ChangeDoctor")]
+    partial class ChangeDoctor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -395,17 +397,21 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("PatientApp.Core.Domain.Entitites.Doctor", b =>
                 {
-                    b.HasOne("PatientApp.Core.Domain.Entitites.Appointment", null)
+                    b.HasOne("PatientApp.Core.Domain.Entitites.Appointment", "Appointment")
                         .WithMany("Doctors")
                         .HasForeignKey("AppointmentId");
 
-                    b.HasOne("PatientApp.Core.Domain.Entitites.LaboratoryResult", null)
+                    b.HasOne("PatientApp.Core.Domain.Entitites.LaboratoryResult", "LaboratoryResult")
                         .WithMany("Doctors")
                         .HasForeignKey("LaboratoryResultId");
 
                     b.HasOne("PatientApp.Core.Domain.Entitites.Patient", null)
                         .WithMany("Doctors")
                         .HasForeignKey("PatientId");
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("LaboratoryResult");
                 });
 
             modelBuilder.Entity("PatientApp.Core.Domain.Entitites.LaboratoryTest", b =>

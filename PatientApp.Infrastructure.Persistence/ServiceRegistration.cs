@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PatientApp.Core.Application.Interfaces.Repositories;
 using PatientApp.Infrastructure.Persistence.Contexts;
+using PatientApp.Infrastructure.Persistence.Repositories;
 using PatientApp.Infrastructure.Persistence.Repository;
 
 namespace PatientApp.Infrastructure.Persistence
@@ -25,6 +26,8 @@ namespace PatientApp.Infrastructure.Persistence
             #region Repositories
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IDoctorRepository, DoctorRepository>();
+
             #endregion
         }
     }

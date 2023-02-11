@@ -1,0 +1,45 @@
+﻿@using PatientApp.Core.Application.ViewModerls.Doctor
+@model List<DoctorViewModel>;
+
+
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Doctor's Management</h1>
+            <p>
+                <a asp-controller="Doctor" asp-action="Create" class="btn btn-primary my-2">Create New Doctor</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="col-md-5">
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>The Type List Is Empty</h2>
+    }
+    else
+    {
+            @foreach (DoctorViewModel item in Model)
+            {
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@item.Image" alt="@item.FirstName">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@item.Phone</li>
+                        <li class="list-group-item">@item.Email</li>
+                        <li class="list-group-item">@item.DNI</li>
+                    </ul>
+                    <div class="card-body">
+                        <a asp-controller="Doctor" asp-action="Edit" asp-route-id="@item.Id" class="card-link">Edit</a>
+                        <a asp-controller="Doctor" asp-action="Delete" asp-route-id="@item.Id" class="card-link">Delete</a>
+                    </div>
+                </div>
+            }
+    }
+    </div>
+</div>
