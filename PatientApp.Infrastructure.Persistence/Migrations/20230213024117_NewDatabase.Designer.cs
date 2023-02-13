@@ -12,8 +12,8 @@ using PatientApp.Infrastructure.Persistence.Contexts;
 namespace PatientApp.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(PatientAppContext))]
-    [Migration("20230211071402_ChangeDoctor")]
-    partial class ChangeDoctor
+    [Migration("20230213024117_NewDatabase")]
+    partial class NewDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -137,12 +137,8 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("LaboratoryResultId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
@@ -163,11 +159,12 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppointmentId");
-
-                    b.HasIndex("LaboratoryResultId");
 
                     b.HasIndex("PatientId");
 
@@ -192,9 +189,6 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LaboratoryTestId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModified")
@@ -230,10 +224,6 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LaboratoryResultId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -244,9 +234,10 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("LaboratoryResultId");
+                    b.HasKey("Id");
 
                     b.ToTable("LaboratoryTests", (string)null);
                 });
@@ -397,32 +388,13 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("PatientApp.Core.Domain.Entitites.Doctor", b =>
                 {
-                    b.HasOne("PatientApp.Core.Domain.Entitites.Appointment", "Appointment")
+                    b.HasOne("PatientApp.Core.Domain.Entitites.Appointment", null)
                         .WithMany("Doctors")
                         .HasForeignKey("AppointmentId");
-
-                    b.HasOne("PatientApp.Core.Domain.Entitites.LaboratoryResult", "LaboratoryResult")
-                        .WithMany("Doctors")
-                        .HasForeignKey("LaboratoryResultId");
 
                     b.HasOne("PatientApp.Core.Domain.Entitites.Patient", null)
                         .WithMany("Doctors")
                         .HasForeignKey("PatientId");
-
-                    b.Navigation("Appointment");
-
-                    b.Navigation("LaboratoryResult");
-                });
-
-            modelBuilder.Entity("PatientApp.Core.Domain.Entitites.LaboratoryTest", b =>
-                {
-                    b.HasOne("PatientApp.Core.Domain.Entitites.LaboratoryResult", "LaboratoryResult")
-                        .WithMany("laboratoryTests")
-                        .HasForeignKey("LaboratoryResultId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("LaboratoryResult");
                 });
 
             modelBuilder.Entity("PatientApp.Core.Domain.Entitites.Patient", b =>
@@ -455,11 +427,7 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                 {
                     b.Navigation("Appointments");
 
-                    b.Navigation("Doctors");
-
                     b.Navigation("Patients");
-
-                    b.Navigation("laboratoryTests");
                 });
 
             modelBuilder.Entity("PatientApp.Core.Domain.Entitites.Patient", b =>

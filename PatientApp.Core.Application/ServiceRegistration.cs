@@ -10,7 +10,8 @@ namespace PatientApp.Core.Application
         public static void AddApplicationLayer(this IServiceCollection services, IConfiguration configuration) =>
         #region Services
             services.AddTransient<IUserService, UserService>()
-            .AddTransient<IDoctorService, DoctorService>();
+            .AddTransient<IDoctorService, DoctorService>()
+            .AddTransient<ILaboratoryTestService, LaboratoryTestService>();
 
         #endregion
 

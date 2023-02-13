@@ -27,6 +27,7 @@ namespace PatientApp.Infrastructure.Persistence
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IDoctorRepository, DoctorRepository>();
+            services.AddTransient<ILaboratoryTestRepository, LaboratoryTestRepository>();
 
             #endregion
         }

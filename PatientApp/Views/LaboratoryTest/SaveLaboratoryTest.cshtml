@@ -1,0 +1,33 @@
+﻿@using PatientApp.Core.Application.ViewModerls.LaboratoryTest
+@model SaveLaboratoryTestViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+
+    ViewData["Title"] = "Save Laboratory Test";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <h4>@(editMode ? $"Editing the test: {Model.Name}" : "Creating a New Laboratory Test")</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="LaboratoryTest" asp-action="@(editMode ? "Edit":"Create")">
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Laboratory Test Name: </label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a asp-controller="LaboratoryTest" asp-action="Index" class="btn btn-warning">Back</a>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

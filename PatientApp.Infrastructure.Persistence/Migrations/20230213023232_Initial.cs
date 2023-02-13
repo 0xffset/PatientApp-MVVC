@@ -4,7 +4,7 @@
 
 namespace PatientApp.Infrastructure.Persistence.Migrations
 {
-    public partial class RemoveDoctor : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

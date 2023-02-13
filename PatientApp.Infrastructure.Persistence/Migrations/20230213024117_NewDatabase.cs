@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PatientApp.Infrastructure.Persistence.Migrations
 {
-    public partial class NewContext : Migration
+    public partial class NewDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,6 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Result = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
-                    LaboratoryTestId = table.Column<int>(type: "int", nullable: false),
                     AppointmentId = table.Column<int>(type: "int", nullable: false),
                     PatientId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -28,6 +27,24 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LaboratoryResults", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LaboratoryTests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LaboratoryTests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,29 +90,6 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                     table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Appointments_LaboratoryResults_LaboratoryResultId",
-                        column: x => x.LaboratoryResultId,
-                        principalTable: "LaboratoryResults",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LaboratoryTests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LaboratoryResultId = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LaboratoryTests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LaboratoryTests_LaboratoryResults_LaboratoryResultId",
                         column: x => x.LaboratoryResultId,
                         principalTable: "LaboratoryResults",
                         principalColumn: "Id");
@@ -174,9 +168,9 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                     Email = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     DNI = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AppointmentId = table.Column<int>(type: "int", nullable: false),
-                    LaboratoryResultId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    AppointmentId = table.Column<int>(type: "int", nullable: true),
                     PatientId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -190,11 +184,6 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                         name: "FK_Doctors_Appointments_AppointmentId",
                         column: x => x.AppointmentId,
                         principalTable: "Appointments",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Doctors_LaboratoryResults_LaboratoryResultId",
-                        column: x => x.LaboratoryResultId,
-                        principalTable: "LaboratoryResults",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Doctors_Patients_PatientId",
@@ -219,19 +208,9 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                 column: "AppointmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Doctors_LaboratoryResultId",
-                table: "Doctors",
-                column: "LaboratoryResultId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Doctors_PatientId",
                 table: "Doctors",
                 column: "PatientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LaboratoryTests_LaboratoryResultId",
-                table: "LaboratoryTests",
-                column: "LaboratoryResultId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patients_AppointmentId",

@@ -138,9 +138,6 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LaboratoryResultId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -167,8 +164,6 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("AppointmentId");
 
-                    b.HasIndex("LaboratoryResultId");
-
                     b.HasIndex("PatientId");
 
                     b.ToTable("Doctors", (string)null);
@@ -192,9 +187,6 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LaboratoryTestId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModified")
@@ -230,10 +222,6 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LaboratoryResultId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -244,9 +232,10 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("LaboratoryResultId");
+                    b.HasKey("Id");
 
                     b.ToTable("LaboratoryTests", (string)null);
                 });
@@ -401,24 +390,9 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                         .WithMany("Doctors")
                         .HasForeignKey("AppointmentId");
 
-                    b.HasOne("PatientApp.Core.Domain.Entitites.LaboratoryResult", null)
-                        .WithMany("Doctors")
-                        .HasForeignKey("LaboratoryResultId");
-
                     b.HasOne("PatientApp.Core.Domain.Entitites.Patient", null)
                         .WithMany("Doctors")
                         .HasForeignKey("PatientId");
-                });
-
-            modelBuilder.Entity("PatientApp.Core.Domain.Entitites.LaboratoryTest", b =>
-                {
-                    b.HasOne("PatientApp.Core.Domain.Entitites.LaboratoryResult", "LaboratoryResult")
-                        .WithMany("laboratoryTests")
-                        .HasForeignKey("LaboratoryResultId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("LaboratoryResult");
                 });
 
             modelBuilder.Entity("PatientApp.Core.Domain.Entitites.Patient", b =>
@@ -451,11 +425,7 @@ namespace PatientApp.Infrastructure.Persistence.Migrations
                 {
                     b.Navigation("Appointments");
 
-                    b.Navigation("Doctors");
-
                     b.Navigation("Patients");
-
-                    b.Navigation("laboratoryTests");
                 });
 
             modelBuilder.Entity("PatientApp.Core.Domain.Entitites.Patient", b =>

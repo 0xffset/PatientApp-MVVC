@@ -98,10 +98,10 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
 
             // Appointments
             modelBuilder.Entity<LaboratoryResult>()
-                .HasMany<Appointment>(g => g.Appointments)
-                .WithOne(s => s.LaboratoryResult)
-                .HasForeignKey(x => x.LaboratoryResultId)
-                .OnDelete(DeleteBehavior.NoAction);
+                 .HasMany<Appointment>(g => g.Appointments)
+                 .WithOne(s => s.LaboratoryResult)
+                 .HasForeignKey(x => x.LaboratoryResultId)
+                 .OnDelete(DeleteBehavior.NoAction);
 
             /*  modelBuilder.Entity<Doctor>()
                   .HasOne<Appointment>(g => g.Appointment)
@@ -116,11 +116,11 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
                   .HasForeignKey(x => x.LaboratoryResultId)
                   .OnDelete(DeleteBehavior.NoAction);*/
 
-            modelBuilder.Entity<LaboratoryTest>()
-                .HasOne<LaboratoryResult>(g => g.LaboratoryResult)
-                .WithMany(s => s.laboratoryTests)
-                .HasForeignKey(x => x.LaboratoryResultId)
-                .OnDelete(DeleteBehavior.NoAction);
+            /*  modelBuilder.Entity<LaboratoryTest>()
+                  .HasOne<LaboratoryResult>(g => g.LaboratoryResult)
+                  .WithMany(s => s.laboratoryTests)
+                  .HasForeignKey(x => x.LaboratoryResultId)
+                  .OnDelete(DeleteBehavior.NoAction);*/
 
 
             // Access Level 

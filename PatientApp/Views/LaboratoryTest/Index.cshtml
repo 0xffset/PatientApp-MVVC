@@ -1,0 +1,47 @@
+﻿@using PatientApp.Core.Application.ViewModerls.LaboratoryTest;
+@model List<LaboratoryTestViewModel>;
+
+
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Doctor's Management</h1>
+            <p>
+                <a asp-controller="LaboratoryTest" asp-action="Create" class="btn btn-primary my-2">Create New Laboratory Test</a>
+            </p>
+        </div>
+    </div>
+</section>
+<div class="container">
+    @if (Model == null || Model.Count == 0)
+    {
+            <h2>The Type List Is Empty</h2>
+    }
+    else
+    {
+          <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Actions</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (LaboratoryTestViewModel item in Model)
+                {
+                            <tr>
+                                <th scope="row">
+                                    <a asp-controller="LaboratoryTest" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                                    <a asp-controller="LaboratoryTest" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                                </th>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                            </tr>
+                }
+                </tbody>
+            </table>
+    }
+</div>
+</div>
