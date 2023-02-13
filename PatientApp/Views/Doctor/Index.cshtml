@@ -15,10 +15,10 @@
 </section>
 
 <div class="container">
-    <div class="col-md-5">
+   <div class="row">
     @if (Model == null || Model.Count == 0)
     {
-        <h2>The Type List Is Empty</h2>
+        <h2>The Doctor List Is Empty</h2>
     }
     else
     {
@@ -27,12 +27,12 @@
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="@item.Image" alt="@item.FirstName">
                     <div class="card-body">
-                        <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                        <h5 class="card-title"><strong>Name: </strong>@item.FirstName @item.LastName</h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">@item.Phone</li>
-                        <li class="list-group-item">@item.Email</li>
-                        <li class="list-group-item">@item.DNI</li>
+                        <li class="list-group-item"><strong>Phone: </strong>@item.Phone</li>
+                        <li class="list-group-item"><strong>Email: </strong>@item.Email</li>
+                        <li class="list-group-item"><strong>DNI: </strong>@item.DNI</li>
                     </ul>
                     <div class="card-body">
                         <a asp-controller="Doctor" asp-action="Edit" asp-route-id="@item.Id" class="card-link">Edit</a>
@@ -41,5 +41,5 @@
                 </div>
             }
     }
-    </div>
+   </div>
 </div>

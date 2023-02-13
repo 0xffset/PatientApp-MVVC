@@ -166,9 +166,7 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
             modelBuilder.Entity<Doctor>()
                .Property(x => x.DNI)
                .IsRequired();
-            modelBuilder.Entity<Doctor>()
-               .Property(x => x.Image)
-               .IsRequired();
+
 
             // Laboratory Result
             modelBuilder.Entity<LaboratoryResult>()

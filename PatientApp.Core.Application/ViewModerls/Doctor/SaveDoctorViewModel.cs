@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace PatientApp.Core.Application.ViewModerls.Doctor
 {
@@ -19,15 +20,15 @@ namespace PatientApp.Core.Application.ViewModerls.Doctor
         public string Email { get; set; }
 
         [Required(ErrorMessage = "You must enter a proper phone number")]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "Email does not phone number")]
+        [DataType(DataType.Text, ErrorMessage = "Email does not phone number")]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "You must enter a proper Image")]
-        [DataType(DataType.Text, ErrorMessage = "Email does not Image")]
-        public string Image { get; set; }
-
-        [RegularExpression("^(([A-Z]\\d{8})|(\\d{8}[A-Z]))$", ErrorMessage = "Wrong DNI")]
+        [Required(ErrorMessage = "You must enter a proper DNI")]
         [DataType(DataType.Text, ErrorMessage = "DNI does not valid")]
         public string DNI { get; set; }
+
+        [DataType(DataType.Upload)]
+        public IFormFile? File { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace PatientApp.Core.Domain.Entitites
         public string Email { get; set; }
         public string Phone { get; set; }
         public string DNI { get; set; }
-        public string Image { get; set; }
+        public string? ImageUrl { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -34,7 +34,8 @@ namespace PatientApp.Infrastructure.Persistence.Repository
 
         public virtual async Task<List<Entity>> GetAllAsync()
         {
-            return await _dbContext.Set<Entity>().ToListAsync();//Deferred execution
+            var data = await _dbContext.Set<Entity>().ToListAsync();//Deferred execution
+            return data;
         }
 
         public virtual async Task<List<Entity>> GetAllWithIncludeAsync(List<string> properties)
