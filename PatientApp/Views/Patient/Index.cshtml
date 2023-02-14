@@ -1,0 +1,50 @@
+﻿@using PatientApp.Core.Application.ViewModerls.Patient;
+@model List<PatientViewModel>;
+
+
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Patient's Management</h1>
+            <p>
+                <a asp-controller="Patient" asp-action="Create" class="btn btn-primary my-2">Create New Patient</a>
+            </p>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2>The Patient List Is Empty</h2>
+        }
+        else
+        {
+            @foreach (PatientViewModel item in Model)
+            {
+               <div class="col">
+                    <div class="card">
+                        <img class="card-img-top" src="@item.UrlImage" alt="@item.FirstName">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Address: </strong>@item.Address</li>
+                            <li class="list-group-item"><strong>Phone: </strong>@item.Phone</li>
+                            <li class="list-group-item"><strong>DNI: </strong>@item.DNI</li>
+                            <li class="list-group-item"><strong>Birth Date: </strong>@item.BirthDate.ToString("dddd, dd MMMM yyyy")</li>
+                            <li class="list-group-item"><strong>Smoke: </strong>@(item.isSmoker ? "Yes" : "No")</li>
+                            <li class="list-group-item"><strong>Allergies: </strong>@(item.hasAllergies ? "Yes" : "No")</li>
+
+                        </ul>
+                        <div class="card-body">
+                            <a asp-controller="Patient" asp-action="Edit" asp-route-id="@item.Id" class="card-link">Edit</a>
+                            <a asp-controller="Patient" asp-action="Delete" asp-route-id="@item.Id" class="card-link">Delete</a>
+                        </div>
+                    </div>
+               </div>
+            }
+        }
+    </div>
+</div>

@@ -84,17 +84,17 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
             #region Relationships
 
             // Patients
-            modelBuilder.Entity<LaboratoryResult>()
-                .HasMany<Patient>(g => g.Patients)
-                .WithOne(s => s.laboratoryResult)
-                .HasForeignKey(x => x.LaboratoryResultId)
-                  .OnDelete(DeleteBehavior.NoAction);
+            /* modelBuilder.Entity<LaboratoryResult>()
+                 .HasMany<Patient>(g => g.Patients)
+                 .WithOne(s => s.laboratoryResult)
+                 .HasForeignKey(x => x.LaboratoryResultId)
+                   .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Appointment>()
-                .HasMany<Patient>(g => g.Patients)
-                .WithOne(s => s.Appointment)
-                .HasForeignKey(x => x.AppointmentId)
-                  .OnDelete(DeleteBehavior.NoAction);
+             modelBuilder.Entity<Appointment>()
+                 .HasMany<Patient>(g => g.Patients)
+                 .WithOne(s => s.Appointment)
+                 .HasForeignKey(x => x.AppointmentId)
+                   .OnDelete(DeleteBehavior.NoAction);*/
 
             // Appointments
             modelBuilder.Entity<LaboratoryResult>()
@@ -198,10 +198,6 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
               .IsRequired();
 
             modelBuilder.Entity<Patient>()
-              .Property(x => x.Email)
-              .IsRequired();
-
-            modelBuilder.Entity<Patient>()
               .Property(x => x.Phone)
               .IsRequired();
             modelBuilder.Entity<Patient>()
@@ -218,9 +214,6 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
               .IsRequired();
             modelBuilder.Entity<Patient>()
               .Property(x => x.HasAllergies)
-              .IsRequired();
-            modelBuilder.Entity<Patient>()
-              .Property(x => x.Image)
               .IsRequired();
 
             // User

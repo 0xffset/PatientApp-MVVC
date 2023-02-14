@@ -1,0 +1,25 @@
+﻿@using PatientApp.Core.Application.ViewModerls.Patient
+@model SavePatientViewModel
+@{
+    ViewData["Title"] = "Delete Patient";
+}
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-danger text-light">
+                <h4>Are you sure want to delete @Model.FirstName</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Patient" asp-action="DeletePost">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a asp-controller="Patient" asp-action="Index" class="btn btn-warning">Cancel</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

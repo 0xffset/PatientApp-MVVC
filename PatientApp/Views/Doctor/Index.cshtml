@@ -15,13 +15,13 @@
 </section>
 
 <div class="container">
-   <div class="row">
-    @if (Model == null || Model.Count == 0)
-    {
-        <h2>The Doctor List Is Empty</h2>
-    }
-    else
-    {
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2>The Doctor List Is Empty</h2>
+        }
+        else
+        {
             @foreach (DoctorViewModel item in Model)
             {
                 <div class="card" style="width: 18rem;">
@@ -40,6 +40,6 @@
                     </div>
                 </div>
             }
-    }
+        }
    </div>
 </div>

@@ -54,8 +54,8 @@ namespace PatientApp.Core.Application.Services
 
         public async Task<List<DoctorViewModel>> GetAllViewModel()
         {
-            var userList = await doctorRepository.GetAllAsync();
-            var data = userList.Where(x => x.UserId == userViewModel.Id).Select(x => new DoctorViewModel
+            var doctorList = await doctorRepository.GetAllAsync();
+            var data = doctorList.Where(x => x.UserId == userViewModel.Id).Select(x => new DoctorViewModel
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
