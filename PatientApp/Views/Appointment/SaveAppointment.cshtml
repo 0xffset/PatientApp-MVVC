@@ -1,0 +1,57 @@
+﻿@using PatientApp.Core.Application.ViewModerls.Appointment
+@model SaveAppointmentViewModel
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+
+    ViewData["Title"] = "Save Appointment";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <h4>@(editMode ? $"Editing the appointment: {Model.Id} " : "Creating a New Appointment")</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Appointment" asp-action="@(editMode ? "Edit":"Create")">
+                        <div class="mb-3">
+                          <label asp-for="IdPatient" class="form-label">Patient: </label>
+                          <select asp-for="IdPatient" asp-items="@(new SelectList(Model.Patients, "Id", "FirstName"))" class="form-select">
+                              <option value="0">Select a patient</option>
+                          </select>
+                          <span asp-validation-for="IdPatient" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="IdDoctor" class="form-label">Doctor: </label>
+                            <select asp-for="IdDoctor" asp-items="@(new SelectList(Model.Doctors, "Id", "FirstName"))" class="form-select">
+                                <option value="0">Select a doctor</option>
+                            </select>
+                            <span asp-validation-for="IdDoctor" class="text-danger"></span>
+                        </div>
+                        <div id="datetimepicker1" class="mb-3">
+                            <label asp-for="Date" class="form-label">Date Appointment: </label>
+                            <div class="input-group date" id="id_0">
+                                <input asp-for="Date" type="datetime" class="form-control" />
+                                <div class="input-group-addon input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Cause" class="form-label">Cause Appointment: </label>
+                            <textarea asp-for="Cause" type="text" class="form-control"></textarea>
+                            <span asp-validation-for="Cause" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a asp-controller="Appointment" asp-action="Index" class="btn btn-warning">Back</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

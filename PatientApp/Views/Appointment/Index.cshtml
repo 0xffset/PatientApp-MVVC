@@ -1,0 +1,66 @@
+﻿@using PatientApp.Core.Application.ViewModerls.Appointment
+@model List<AppointmentViewModel>;
+
+
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Appointment's Management</h1>
+            <p>
+                <a asp-controller="Appointment" asp-action="Create" class="btn btn-primary my-2">Create New Appointment</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>The Appointment List Is Empty</h2>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Actions</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Patient Name</th>
+                    <th scope="col">Doctor Name</th>
+                    <th scope="col">Date Appointment</th>
+                    <th scope="col">Time Appointment</th>
+                    <th scope="col">Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (AppointmentViewModel item in Model)
+                {
+                    <tr>
+                        <th scope="row">
+                            @switch (item.Status)
+                            {     case 1:
+                                    <a asp-controller="Appointment" asp-action="AppointmentPending" asp-route-id="@item.Id" class="btn btn-danger">Appointment Pending</a>
+                                    break;
+                                case 2:
+                                    <a asp-controller="Appointment" asp-action="AppointmentPendingResult" asp-route-id="@item.Id" class="btn btn-warning">Appointment Result</a>
+                                    break;
+                                case 3:
+                                    <a asp-controller="Appointment" asp-action="AppointmentComplete" asp-route-id="@item.Id" class="btn btn-primary">Appointment Complete</a>
+                                    break;
+                            }
+                            <a asp-controller="Appointment" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </th>
+                        <td>@item.Id</td>
+                        <td>@item.PatientName</td>
+                        <td>@item.DoctorName</td>
+                        <td>@item.Date.ToShortDateString()</td>
+                        <td>@item.Date.ToShortTimeString()</td>
+                        <td>@item.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

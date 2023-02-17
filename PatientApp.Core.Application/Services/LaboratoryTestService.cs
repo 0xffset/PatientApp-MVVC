@@ -51,6 +51,16 @@ namespace PatientApp.Core.Application.Services
             return data;
         }
 
+        public async Task<List<LaboratoryTestViewModel>> GetAllViewModelWithoutAuthentication()
+        {
+            var userList = await laboratoryTestRepository.GetAllAsync();
+            var data = userList.Select(x => new LaboratoryTestViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).ToList();
+            return data;
+        }
         public async Task<SaveLaboratoryTestViewModel> GetByIdSaveViewModel(int id)
         {
             var lab = await laboratoryTestRepository.GetByIdAsync(id);

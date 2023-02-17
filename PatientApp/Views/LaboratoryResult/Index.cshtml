@@ -1,0 +1,58 @@
+﻿@using PatientApp.Core.Application.ViewModerls.LaboratoryResult;
+@model List<LaboratoryResultViewModel>;
+
+
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Laboratoy Result's</h1>
+        </div>
+    </div>
+</section>
+<div class="container">
+<p>Type something in the input field to search the table:</p>  
+<input class="form-control" id="myInput" type="text" placeholder="Search laboratoy result">
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>The Laboratory Result Is Empty</h2>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Actions</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Laboratory Test Name</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                @foreach (LaboratoryResultViewModel item in Model)
+                {
+                    <tr>
+                        <th scope="row">
+                            <a asp-controller="LaboratoryResult" asp-action="Report" asp-route-id="@item.Id" class="btn btn-primary">Report Result</a>
+                        </th>
+                        <td>@item.Id</td>
+                        <td>@item.PatientName</td>
+                        <td>@item.PatientDNI</td>
+                        <td>@item.LaboratoryTestName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>

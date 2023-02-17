@@ -1,0 +1,33 @@
+﻿@using PatientApp.Core.Application.ViewModerls.LaboratoryResult
+@model SaveLaboratoyResultViewModel
+@{
+    
+
+    ViewData["Title"] = "Report Result";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <h4>Reporting Result</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="LaboratoryResult" asp-action="Report">
+                        <div class="mb-3">
+                            <label asp-for="ReportResult" class="form-label">Laboratory Test Name: </label>
+                            <textarea asp-for="ReportResult" class="form-control"></textarea>
+                            <span asp-validation-for="ReportResult" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Report</button>
+                        <a asp-controller="LaboratoryResult" asp-action="Index" class="btn btn-warning">Back</a>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

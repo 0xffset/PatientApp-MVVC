@@ -1,0 +1,32 @@
+﻿@using PatientApp.Core.Application.ViewModerls.Appointment
+@model SaveAppointmentViewModel
+@{
+
+
+    ViewData["Title"] = "Select Laboratory Result";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light">
+                    <h4>Select Laboratory Test</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Appointment" asp-action="AppointmentPending">
+                        <div class="mb-3">
+                            <label asp-for="SelectedMultiplesLaboratoryTest" class="form-label">Laboratory Tests: </label>
+                            <select asp-for="SelectedMultiplesLaboratoryTest" asp-items="@(new MultiSelectList(Model.LaboratoryTests, "Id", "Name"))" class="form-select" multiple>
+                                <option value="0">Select laboraroy test</option>
+                            </select>
+                            <span asp-validation-for="SelectedMultiplesLaboratoryTest" class="text-danger"></span>
+                         </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a asp-controller="Appointment" asp-action="Index" class="btn btn-warning">Back</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PatientApp.Infrastructure.Persistence.Contexts;
 
@@ -11,9 +12,10 @@ using PatientApp.Infrastructure.Persistence.Contexts;
 namespace PatientApp.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(PatientAppContext))]
-    partial class PatientAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230216054751_NullableResult")]
+    partial class NullableResult
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

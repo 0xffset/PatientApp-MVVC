@@ -68,6 +68,18 @@ namespace PatientApp.Core.Application.Services
             return data;
         }
 
+        public async Task<List<DoctorViewModel>> GetAllViewModelWithoutAuthentication()
+        {
+            var doctorList = await doctorRepository.GetAllAsync();
+            var data = doctorList.Select(x => new DoctorViewModel
+            {
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+            }).ToList();
+            return data;
+        }
+
         public async Task<SaveDoctorViewModel> GetByIdSaveViewModel(int id)
         {
             var product = await doctorRepository.GetByIdAsync(id);

@@ -13,5 +13,11 @@
         Task<SaveViewModel> GetByIdSaveViewModel(int id);
 
         Task<List<ViewModel>> GetAllViewModel();
+
+
+
+        Task<List<ViewModel>> GetAllViewModelWithoutAuthentication();
+
+
     }
 }

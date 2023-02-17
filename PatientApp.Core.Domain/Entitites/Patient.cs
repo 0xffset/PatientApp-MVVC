@@ -14,5 +14,7 @@ namespace PatientApp.Core.Domain.Entitites
         public bool HasAllergies { get; set; }
         public string? Image { get; set; }
         public int UserId { get; set; }
+        public ICollection<Appointment>? Appointments { get; set; }
+        public ICollection<LaboratoryResult>? LaboratoryResults { get; set; }
     }
 }

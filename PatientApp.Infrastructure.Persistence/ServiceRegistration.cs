@@ -29,6 +29,8 @@ namespace PatientApp.Infrastructure.Persistence
             services.AddTransient<IDoctorRepository, DoctorRepository>();
             services.AddTransient<ILaboratoryTestRepository, LaboratoryTestRepository>();
             services.AddTransient<IPatientRepository, PatientRepository>();
+            services.AddTransient<IAppointmentRepository, AppointmentRepository>();
+            services.AddTransient<ILaboratoryResultRepository, LaboratoryResultRepository>();
 
             #endregion
         }

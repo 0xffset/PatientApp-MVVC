@@ -6,5 +6,7 @@ namespace PatientApp.Core.Domain.Entitites
     {
         public string Name { get; set; }
         public int UserId { get; set; }
+
+        public ICollection<LaboratoryResult>? LaboratoryResults { get; set; }
     }
 }

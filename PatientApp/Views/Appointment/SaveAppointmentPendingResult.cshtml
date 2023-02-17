@@ -1,0 +1,48 @@
+﻿@using PatientApp.Core.Application.ViewModerls.Appointment
+@model List<SaveAppointmentPendingResult>;
+
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">laboratory Results</h1>
+            <p>
+                <a asp-controller="Appointment" asp-action="Complete" asp-route-id="@TempData["id"]" class="btn btn-primary my-2">Complete Appointment</a>
+            </p>
+            <p>
+                <a asp-controller="Appointment" asp-action="Index" class="btn btn-primary my-2">Appointment Close</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<div class="container">
+    @if (Model == null || Model.Count == 0)
+    {
+        <h2>The Appointment List Is Empty</h2>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  
+                    <th scope="col">Id</th>
+                    <th scope="col">Laboratory Test Name</th>
+                    <th scope="col">Laboratory Result Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (SaveAppointmentPendingResult item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.LaboratoryTestName</td>
+                        <td>@(@item.LaboratoryResultStatus == 0? "Pending" : "Completed")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

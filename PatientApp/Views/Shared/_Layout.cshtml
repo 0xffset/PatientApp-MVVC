@@ -13,8 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PatientApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+  
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PatientApp.styles.css" asp-append-version="true" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <header>
@@ -48,13 +51,13 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="Index">Mat. Patients</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Mat. Appointments</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Mat. Appointments</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Mat. Laboratory Results</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="LaboratoryResult" asp-action="Index">Mat. Laboratory Results</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LogOut">Log Out</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LogOut">Log Out</a>
                                 </li>
                             }
                         }

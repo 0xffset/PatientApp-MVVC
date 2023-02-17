@@ -12,8 +12,9 @@ namespace PatientApp.Core.Application
             services.AddTransient<IUserService, UserService>()
             .AddTransient<IDoctorService, DoctorService>()
             .AddTransient<ILaboratoryTestService, LaboratoryTestService>()
-            .AddTransient<IPatientService, PatientService>();
-
+            .AddTransient<IPatientService, PatientService>()
+            .AddTransient<IAppointmetService, AppointmentService>()
+            .AddTransient<ILaboratoryResultService, LaboratoryResultService>();
         #endregion
 
     }

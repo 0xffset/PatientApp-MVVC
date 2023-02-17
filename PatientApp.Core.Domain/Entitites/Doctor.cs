@@ -11,5 +11,7 @@ namespace PatientApp.Core.Domain.Entitites
         public string DNI { get; set; }
         public string? ImageUrl { get; set; }
         public int UserId { get; set; }
+
+        public ICollection<Appointment>? Appointments { get; set; }
     }
 }

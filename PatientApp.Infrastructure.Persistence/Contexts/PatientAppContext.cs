@@ -83,45 +83,29 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
 
             #region Relationships
 
-            // Patients
-            /* modelBuilder.Entity<LaboratoryResult>()
-                 .HasMany<Patient>(g => g.Patients)
-                 .WithOne(s => s.laboratoryResult)
-                 .HasForeignKey(x => x.LaboratoryResultId)
-                   .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Doctor>()
+               .HasMany<Appointment>(doctor => doctor.Appointments)
+               .WithOne(appointment => appointment.Doctor)
+               .HasForeignKey(appointment => appointment.DoctorId)
+               .OnDelete(DeleteBehavior.NoAction);
 
-             modelBuilder.Entity<Appointment>()
-                 .HasMany<Patient>(g => g.Patients)
-                 .WithOne(s => s.Appointment)
-                 .HasForeignKey(x => x.AppointmentId)
-                   .OnDelete(DeleteBehavior.NoAction);*/
+            modelBuilder.Entity<Patient>()
+             .HasMany<Appointment>(patient => patient.Appointments)
+             .WithOne(appointment => appointment.Patient)
+             .HasForeignKey(appointment => appointment.PatientId)
+             .OnDelete(DeleteBehavior.NoAction);
 
-            // Appointments
-            modelBuilder.Entity<LaboratoryResult>()
-                 .HasMany<Appointment>(g => g.Appointments)
-                 .WithOne(s => s.LaboratoryResult)
-                 .HasForeignKey(x => x.LaboratoryResultId)
-                 .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Patient>()
+             .HasMany<LaboratoryResult>(patient => patient.LaboratoryResults)
+             .WithOne(laboratoryresult => laboratoryresult.Patient)
+             .HasForeignKey(laboratoryresult => laboratoryresult.PatientId)
+             .OnDelete(DeleteBehavior.NoAction);
 
-            /*  modelBuilder.Entity<Doctor>()
-                  .HasOne<Appointment>(g => g.Appointment)
-                  .WithMany(s => s.Doctors)
-                  .HasForeignKey(x => x.AppointmentId)
-                  .OnDelete(DeleteBehavior.NoAction);
-
-
-              modelBuilder.Entity<Doctor>()
-                  .HasOne<LaboratoryResult>(g => g.LaboratoryResult)
-                  .WithMany(s => s.Doctors)
-                  .HasForeignKey(x => x.LaboratoryResultId)
-                  .OnDelete(DeleteBehavior.NoAction);*/
-
-            /*  modelBuilder.Entity<LaboratoryTest>()
-                  .HasOne<LaboratoryResult>(g => g.LaboratoryResult)
-                  .WithMany(s => s.laboratoryTests)
-                  .HasForeignKey(x => x.LaboratoryResultId)
-                  .OnDelete(DeleteBehavior.NoAction);*/
-
+            modelBuilder.Entity<LaboratoryTest>()
+            .HasMany<LaboratoryResult>(laboratorytest => laboratorytest.LaboratoryResults)
+            .WithOne(laboratoryresult => laboratoryresult.LaboratoryTest)
+            .HasForeignKey(laboratoryresult => laboratoryresult.PatientId)
+            .OnDelete(DeleteBehavior.NoAction);
 
             // Access Level 
             modelBuilder.Entity<AccessLevel>()
@@ -169,10 +153,6 @@ namespace PatientApp.Infrastructure.Persistence.Contexts
 
 
             // Laboratory Result
-            modelBuilder.Entity<LaboratoryResult>()
-                .Property(x => x.Result)
-                .HasMaxLength(2000)
-                .IsRequired();
             modelBuilder.Entity<LaboratoryResult>()
                 .Property(x => x.DoctorId)
                 .IsRequired();

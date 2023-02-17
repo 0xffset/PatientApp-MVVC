@@ -101,6 +101,11 @@ namespace PatientApp.Core.Application.Services
             vm.UserType = user.AccessLevelId;
             return vm;
         }
+
+        public Task<List<UserViewModel>> GetAllViewModelWithoutAuthentication()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
